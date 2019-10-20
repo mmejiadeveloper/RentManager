@@ -1,0 +1,83 @@
+@media screen and (max-width: 767px) {
+    .fs-mobile-title-size {
+        font-size: 25px;
+    }
+    .max-mobile-input-size {
+        width: 100% !important;
+    }
+    .mobile-left {
+        text-align: left !important;
+    }
+    .onlymobile {
+        display: block !important;
+    }
+    .onlydesktop {
+        display: none !important;
+    }
+    .github {
+        position: absolute !important;
+        top: 326px !important;
+        right: 47px !important;
+        cursor: pointer;
+    }
+}
+
+.github {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    cursor: pointer;
+}
+
+.onlymobile {
+    display: none;
+}
+
+.onlydesktop {
+    display: block;
+}
+
+.half-mobile-input-size {
+    width: 50% !important;
+}
+
+.floattext {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.cDis {
+    background: #d0fac3;
+}
+
+.cNoDis {
+    background: #f7bdbd;
+}
+
+.cPed {
+    background: #f7f3bd;
+}
+
+.v-paginador {
+    margin-top: 12px;
+    font-size: 23px
+}
+
+.v-paginador-disabled {
+    pointer-events: none!important;
+    color: #c2c2c2!important
+}
+
+.displaypaginador {
+    font-size: 17px;
+    margin-bottom: 10px
+}
+
+.v-paginador-absolute {
+    z-index: 99;
+    left: 36%;
+}

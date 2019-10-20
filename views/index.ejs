@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage your rent options!</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <script src="vue.min.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="notify.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=1.1">
+
+</head>
+
+<body>
+    <div id="app" class="py-2 px-3">
+        <div class="row">
+            <div class="col-xs-6 col-md-6 col-sm-6 text-left">
+                <h3>RentManager
+                </h3>
+                <span class="onlymobile" style="cursor:pointer; position: absolute; right: 100%; right: 9px; top:0px;" onclick='location.href = "logout"'>Salir <i class="fas fa-door-closed    "></i></span>
+            </div>
+            <div class="onlydesktop col-xs-6 col-md-6 col-sm-6 text-right mobile-left">
+                <span style="cursor:pointer;" onclick='location.href = "logout"'>Salir <i class="fas fa-door-closed    "></i></span>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 col-sm-12 text-left px-0">
+            <h4>Listado de opciones</h4>
+            <button onclick="location.href= 'create' " type="button" class="btn btn-primary">Crear
+                opci&oacute;n</button>
+        </div>
+        <div class="col-xs-12 col-md-12 col-sm-12 text-left pt-2 px-0">
+            <label for="">Buscar enlace:</label>
+            <div class="input-group mb-3">
+                <input v-on:keyup.enter="buscar" v-model="link" type="text" class="form-control half-mobile-input-size" name="" id="" aria-describedby="helpId" placeholder="Busque por enlace donde encontro el inmueble">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                </div>
+            </div>
+            <button @click="buscar" type="button" class="btn btn-success mt-3">Buscar</button>
+            <button v-if="link.length > 1" @click="borrarYRebuscar()" type="button" class="btn btn-danger mt-3">Borrar</button>
+        </div>
+        <div class="col-xs-12 col-md-12 col-sm-12 pt-5 px-0">
+            <div class="" v-if="opciones.length > 0">
+                <div style="height: 270px;">
+                    <table class="table table-sm table-responsive-sm ">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%">
+                                    Enlace
+                                </th>
+                                <th>
+                                    Municipio
+                                </th>
+                                <th>
+                                    Direccion
+                                </th>
+                                <th>
+                                    Contacto
+                                </th>
+                                <th>
+                                    Visitado
+                                </th>
+                                <th>
+                                    Estado
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="(pagina-1)*numero <= index && pagina*numero > index" v-for="(item, index) in opciones" :class="optionState(item.state.id)">
+                                <td style="width: 10%"> <a target="__blank" style="cursor: pointer; color: blue;" @click="window.open( item.link, '_blank')">{{item.link.substring(0,30)}}</a></td>
+                                <td>{{item.location != null ? item.location.name : ''}}</td>
+                                <td>{{item.adress}}</td>
+                                <td>{{item.contact}}</td>
+                                <td v-html="item.checked == 1 ? 'Si' : 'No'"></td>
+                                <td>{{item.state.name}}</td>
+                                <td>
+
+                                    <% if(permission.write == 1) { %>
+                                        <span @click='edit(item.id)' style="cursor: pointer;" title="Editar"><i class="fas fa-edit"></i> Editar</span>
+                                        <% } %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="v-paginador v-paginador-absolute text-center" v-if="opciones.length > 0">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displaypaginador px-0">
+                        P&aacute;gina actual: {{ pagina }}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displaypaginador">
+                        <a :class=" [ pagina!=1 ? '' : 'v-paginador-disabled']  " href="#" @click.prevent="pagina=1"><i class="fas fa-backward  icustom2"></i></a>
+                        <a :class=" [ pagina!=1 ? '' : 'v-paginador-disabled'] " href="#" @click.prevent="pagina=pagina-1"><i class="fas fa-arrow-circle-left icustom2"></i></a>
+                        <a :class=" [ (pagina*numero)/(opciones.length) < 1 ? '' : 'v-paginador-disabled'] " href="#" @click.prevent="pagina=pagina+1"><i class="fas fa-arrow-circle-right icustom2"></i></a>
+                        <a :class=" [ (pagina*numero)/(opciones.length) < 1 ? '' : 'v-paginador-disabled']" href="#" @click.prevent="pagina=redondear_numero(opciones.length/numero, 0 )"><i class="fas fa-forward icustom2"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center" v-else>
+                <div class="floattext">
+                    <span>No se encontraron registros</span> <br>
+                    <small>Crea uno pulsando sobre 'Crear opci&oacute;n'</small>
+                </div>
+                <img src="images/emptybook.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="text-center">
+            Developed by Miguel Mejia
+            <br>
+            <em>
+                Corpyright <i class="fa fa-copyright" aria-hidden="true"></i> - 2019
+            </em>
+        </div>
+    </footer>
+    <script src="appList.js?version=1.0"></script>
+</body>
+
+</html>

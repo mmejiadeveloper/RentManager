@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage your rent options!</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <script src="vue.min.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="notify.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=1.1">
+</head>
+
+<body>
+    <div id="app" class="py-2 px-3">
+        <div class="row">
+            <div class="col-xs-6 col-md-6 col-sm-6 text-left">
+                <h3>RentManager
+                </h3>
+                <span class="onlymobile" style="cursor:pointer; position: absolute; right: 100%; right: 9px; top:0px;" onclick='location.href = "logout"'>Salir <i class="fas fa-door-closed    "></i></span>
+            </div>
+            <div class="onlydesktop col-xs-6 col-md-6 col-sm-6 text-right mobile-left">
+                <span style="cursor:pointer;" onclick='location.href = "logout"'>Salir <i class="fas fa-door-closed    "></i></span>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 col-sm-12 col-12 text-left px-0">
+            <h4 class="fs-mobile-title-size">Crear opci&oacute;n - Arriendo </h4>
+        </div>
+
+        <div class="col-xs-12 col-md-12 col-sm-12 pt-3 px-0">
+            <div class="form-group">
+                <label style="font-size:25px;" for="">Enlace - <i class="fas fa-link"></i></label>
+                <input v-model='enlace' maxlength="100" type="text" class="form-control form-control-sm w-25 max-mobile-input-size" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label style="font-size:25px;" for="">Municipio - <i class="far fa-map"></i></label>
+                <select v-model='municipio' class="form-control form-control-sm w-25 max-mobile-input-size" name="" id="">
+                    <option v-for="(item, index) in municipiosDisponibles" :value="item.id">{{item.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="font-size:25px;" for="">Direcci&oacute;n - <i class="fa fa-address-book" aria-hidden="true"></i> </label>
+                <input maxlength="50" v-model='direccion' type="text" class="form-control form-control-sm w-25 max-mobile-input-size" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label style="font-size:25px;" for="">Contacto - <i class="fab fa-whatsapp"></i> </label>
+                <input maxlength="20" v-model='contacto' type="text" class="form-control form-control-sm w-25 max-mobile-input-size" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label style="font-size:25px;" for="">Visitado</label>
+                <select v-model='visitado' class="form-control form-control-sm w-25 max-mobile-input-size" name="" id="">
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="font-size:25px;" for="">Estado</label>
+                <select v-model='estado' class="form-control form-control-sm w-25 max-mobile-input-size" name="" id="">
+                    <option v-for="(item, index) in estadosDisponibles" :value="item.id">{{item.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label style="font-size:25px;" for="">Observaciones</label>
+                <textarea maxlength="250" v-model='observaciones' class="form-control form-control-sm w-25 max-mobile-input-size" name="" id="" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <% if(permission.write == 1) { %>
+                    <button :disabled='permitirGuardado' @click="guardar" type="button" class="btn btn-success">Guardar</button>
+                    <% } %>
+
+                        <button @click="location.href= '/dashboard'" type="button" class="btn btn-default">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="text-center">
+            Developed by Miguel Mejia
+            <br>
+            <em>
+                Corpyright <i class="fa fa-copyright" aria-hidden="true"></i> - 2019
+            </em>
+        </div>
+    </footer>
+    <script src="appCreate.js?version=1.0"></script>
+</body>
+
+</html>

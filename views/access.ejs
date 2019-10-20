@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage your rent options!</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <script src="vue.min.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="notify.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=1.2">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div id="app" class="py-2 px-3 text-center">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-sm-12 text-center">
+                <h3>RentManager
+                </h3>
+                <img onclick="window.open('https://github.com/mmejiadeveloper/RentManager', '_blank')" width="200px" class="img-fluid github" src="images/github.png" alt="" srcset="">
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-12 col-sm-12 text-center px-0">
+            <h4>
+                <%= message %>
+            </h4>
+
+        </div>
+        <div class="col-xs-6 col-md-6 col-sm-6 text-center pt-2 px-0 mx-auto">
+            <div class="input-group mb-3">
+                <input v-on:keyup.enter="enviar" v-on:keyup.enter="buscar" v-model="accesskey" type="password" class="form-control half-mobile-input-size" name="" id="" aria-describedby="helpId" placeholder="Ingrese la clave de acceso">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-6 col-sm-6 text-center pt-2 px-0 mx-auto">
+            <button @click="enviar" type="button" class="btn btn-primary mx-3">Acceder</button>
+        </div>
+        <div class="col-xs-12 col-md-12 col-sm-12 text-center pt-2 px-0 mx-auto">
+            <span v-if="message.length > 0">{{message}}</span>
+        </div>
+    </div>
+    <footer>
+        <div class="text-center">
+            Developed by Miguel Mejia
+            <br>
+            <em>
+                Corpyright <i class="fa fa-copyright" aria-hidden="true"></i> - 2019
+            </em>
+        </div>
+    </footer>
+    <script src="appAccess.js?version=1.0"></script>
+</body>
+
+</html>
