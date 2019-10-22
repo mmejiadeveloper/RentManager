@@ -22,6 +22,7 @@ export class OptionDao {
             optionModel.contact = data.contacto;
             optionModel.checked = data.visitado == "Si" ? 1 : 0;
             optionModel.state = data.estado;
+            optionModel.doesLike = data.deseable;
             optionModel.notes = data.observaciones;
             await optionRepositoy.save(optionModel);
             return { result: 1, message: 'Opcion guardada', state: 'success' };

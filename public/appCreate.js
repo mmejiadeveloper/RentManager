@@ -7,6 +7,7 @@ const app = new Vue({
         contacto: '',
         visitado: 'Si',
         estado: '0',
+        deseable: 'Si',
         observaciones: '',
         request: null,
         estadosDisponibles: [{

@@ -47,6 +47,10 @@ var Option = /** @class */ (function () {
         typeorm_1.Column({ width: 250, type: String }),
         __metadata("design:type", String)
     ], Option.prototype, "notes", void 0);
+    __decorate([
+        typeorm_1.Column({ width: 2, type: String }),
+        __metadata("design:type", String)
+    ], Option.prototype, "doesLike", void 0);
     Option = __decorate([
         typeorm_1.Entity()
     ], Option);

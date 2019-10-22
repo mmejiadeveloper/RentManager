@@ -67,6 +67,7 @@ var OptionDao = /** @class */ (function () {
                         optionModel.contact = data.contacto;
                         optionModel.checked = data.visitado == "Si" ? 1 : 0;
                         optionModel.state = data.estado;
+                        optionModel.doesLike = data.deseable;
                         optionModel.notes = data.observaciones;
                         return [4 /*yield*/, optionRepositoy.save(optionModel)];
                     case 4:

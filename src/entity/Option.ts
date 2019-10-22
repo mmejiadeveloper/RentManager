@@ -29,4 +29,7 @@ export class Option {
     @Column({ width: 250, type: String })
     notes: string;
 
+    @Column({ width: 2, type: String })
+    doesLike: string;
+
 }

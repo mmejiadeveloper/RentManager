@@ -41,18 +41,19 @@ const app = new Vue({
             })();
         },
         optionState(arg) {
+            let style = '';
             switch (arg) {
                 case 1:
-                    optionState = 'cDis';
+                    style = 'cDis';
                     break;
                 case 3:
-                    optionState = 'cPed';
+                    style = 'cPed';
                     break;
-                case 2:
-                    optionState = 'cNoDis';
+                case 5:
+                    style = 'cNoDis';
                     break;
             }
-            return optionState;
+            return style;
         },
         borrarYRebuscar() {
             this.link = '';
